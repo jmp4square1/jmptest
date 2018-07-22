@@ -1,4 +1,4 @@
-# techtest
+# jmptest
 Technical test from Javier Moral to Square1
 
 <h2>Technical specifications:</h2>
