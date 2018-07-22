@@ -96,11 +96,12 @@ Technical test from Javier Moral to Square1
     </ol>        
     </li>
     <li><i>Technical requirements:</i> The app needs Redis, NodeJS and PM2, the other requeriments are installed in the main deploy when you run "composer install".</li>
-    <li><i>NodeJS deploy:</i> The queue programmed in NodeJS is locate at <b>/app/Node</b>, you need download dependencies, go there and run <b>npm install</b></li>
+    <li><i>NodeJS deploy:</i> The queue programmed in NodeJS is locate at <b>app/Node</b>, you need download dependencies, go there and run <b>npm install</b></li>
     <li><i>PM2</i>: We need "something" to run the node queue in background, PM2 is a good choice. Run <b>npm install pm2@latest -g</b>, then we need demonize the queue.js, run <b>pm2 start queue.js</b> . Shutdown the queue.js run <b>pm2 stop queue</b> or delete it <b>pm2 delete queue</b></li>
     <li><i>How can I activate the fast mode?:</i> If all is installed (redis-node-pm2) you can enable or disable at any time as many times as you want, when enable "fast mode" the crawler talks with redis and nodejs, when disable it talks with mysql and download image in the same php process. Go to <b>config/squareone.php</b> and change the <b>fast_mode</b> variable.</li>
-    <li><i>Can I take a look to queue works?:</i> Yes, due to test purposes, the queue is login his process with console.log, you can view with <b>pm2 log queue</b></li>
-    <li><i><b>Remember</b>:</i> If REDIS server not has default values, you need change configurations, <b>config/database.php</b> to Laravel and </b>app/Node/config.js</b> to NodeJS.</li>
+    <li><i>Can I take a look to queue works?:</i> Yes, due to test purposes, the queue is login his process with console.log, you can view with <b>pm2 log queue</b>. Adiccionaly, use something like <b>npm install redis-commander -g</b> to take a look to Redis.</li>
+    <li><i><b>Remember</b>:</i> If REDIS server not has default values, you need change configurations, <b>config/database.php</b> to Laravel and <b>app/Node/config.js</b> to NodeJS.</li>
+    <li><i><b>Note</b>:</i> To fill queue quickly, delete all images at <b>public/img/product</b> and run <b>pm2 log queue</b></li>
 </ul>
 
 <u><b>Favourites</b></u>: 
