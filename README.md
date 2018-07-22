@@ -12,7 +12,7 @@ Technical test from Javier Moral to Square1
     <li>PM2 (http://pm2.keymetrics.io/docs/usage/quick-start/) (optional but mandatory in fast_mode)</li>
 </ul>
 
-<h2>General Installation:</h2>
+<h2>Main Installation:</h2>
 
 <ul>
     <li>Run <b>git clone https://github.com/jmp4square1/jmptest.git</b> in Apache root directory. The app url should be: http://localhost/jmptest/public</li>
@@ -39,7 +39,7 @@ Technical test from Javier Moral to Square1
             catalog_n_products_x_page: Number of products per page showing in frontend.
         </li>
         <li>
-            fast_mode: Enable/disable fast mode.
+            fast_mode: Enable/disable fast mode (explained at bottom).
         </li>
     </ul>    
 </li>
