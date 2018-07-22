@@ -126,8 +126,8 @@ class CrawlerAppliances extends CrawlerCore
                 // Make image links to target server is dangerous (hotlinking)
                 // In a massive traffic scenario we can consume a lot of megas from the source server
                 // And we can get ban, a lot of bytes or hits must be avoid. 
-                // Now, we must schedule this task, usually this job gets much resources (time and memory), but... I have not time :)
-                
+                // Now, we must schedule this task, usually this job gets much resources (time and memory), 
+                // This is possible when the fast_mode is activated :)                
                 $v_image_name = str_slug($v_product_data['name']);                
                 h_getImageAndSave($v_product_data['url_img_base'],$v_image_name,'base');
                 h_getImageAndSave($v_product_data['url_img_logo'],$v_image_name,'logo');
