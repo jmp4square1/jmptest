@@ -8,7 +8,7 @@ Technical test from Javier Moral to Square1
     <li>From LARAVEL 5.6 (https://laravel.com/docs/5.6#server-requirements)</li>
     <li>MySQL (mariadb)</li>
     <li>Redis server (optional but mandatory in fast_mode)</li>
-    <li>NodeJS (optional but mandatory in fast_mode)</li>
+    <li>NodeJS & NPM (optional but mandatory in fast_mode)</li>
     <li>PM2 (http://pm2.keymetrics.io/docs/usage/quick-start/) (optional but mandatory in fast_mode)</li>
 </ul>
 
@@ -30,15 +30,23 @@ Technical test from Javier Moral to Square1
 
 <ul>
     <li><i>About:</i> Fast mode is a chance for show a portion of my technical knowledge about Redis and Node JS. Is optional because need a much complex deploying and i don't know if the test machine will support this.</li>
-
-    <li><i>PM2</i>: We need "something" to run the node queue in background, PM2 is a good choice. Run <b>npm install pm2@latest -g</b>, then we need demonize the queue.js, run <b>pm2 start queue.js</b></li>
-
+    <li><i>What does?:</i> The UX is invariant, the change is in background. Mainly does two important changes:
+    <ol>
+        <li>When the crawler feeds his seeds talks with Redis avoid mysql transactions.</li>
+        <li>The hard work of download images is delegated to a queue, programmed in NODE with Redis support. PHP and NODE talks through a channel published by REDIS, PHP publish and NODE suscribe, inserting in the queue (list in REDIS) the request and consume one by one avoiding get ban.</li>
+    </ol>        
+    </li>
+    <li><i>Technical requirements:</i> The app needs Redis, NodeJS and PM2, the other requeriments are installed in the main deploy when you run "composer install".</li>
+    <li><i>NodeJS deploy:</i> The queue programmed in NodeJS is locate at <b>/app/Node</b>, you need download dependencies, go there and run <b>npm install</b></li>
+    <li><i>PM2</i>: We need "something" to run the node queue in background, PM2 is a good choice. Run <b>npm install pm2@latest -g</b>, then we need demonize the queue.js, run <b>pm2 start queue.js</b> . Shutdown the queue.js run <b>pm2 stop queue</b> or delete it <b>pm2 delete queue</b></li>
+    <li><i>How can I activate the fast mode?:</i> If all is installed (redis-node-pm2) you can enable or disable at any time as many times as you want, when enable "fast mode" the crawler talks with redis and nodejs, when disable it talks with mysql and download image in the same php process. Go to <b>config/squareone.php</b> and change the <b>fast_mode</b> variable.</li>
+    <li><i>Can I take a look to queue works?:</i> Yes, due to test purposes, the queue is login his process with console.log, you can view with <b>pm2 log queue</b></li>
+    <li><i><b>Remember</b>:</i> If REDIS server not have default values, you need change configurations, <b>config/database.php</b> to Laravel and </b>app/Node/config.js</b> to NodeJS.</li>
 </ul>
-
 
 <h2>Documentation (a brief explanation about project):</h2>
 
-<u><b>Configuration Files</b></u>: Always is a good practice extract operations values to a config file (or to database). 
+<u><b>Configuration Files</b></u>: Always is a good practice extract operations values to a config file (or to database), the most important are: 
 <ul>
 <li><i>config/squareone.php</i>:
     <ul>
@@ -47,6 +55,9 @@ Technical test from Javier Moral to Square1
         </li>
         <li>
             catalog_n_products_x_page: Number of products per page showing in frontend.
+        </li>
+        <li>
+            fast_mode: Enable/disable fast mode.
         </li>
     </ul>    
 </li>
