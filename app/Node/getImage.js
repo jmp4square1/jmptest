@@ -14,8 +14,6 @@ var getImage = function (pRedis) {
 
 getImage.prototype.process = function(pNewTask) {
     
-    console.log('++ process '); 
-    
     var vSelf = this;
     this._redis.conection().sadd(CONFIG.REDIS_VARIABLE_QUEUE,pNewTask,function process_sadd(pErr,pResult) {
         if(pErr) { 
