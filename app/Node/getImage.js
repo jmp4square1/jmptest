@@ -122,7 +122,7 @@ getImage.prototype.getFromQueue = function() {
         }
         else {
             // No more task? we are finish!! 
-            console.log('++ Queue empty, task fisnish!');
+            console.log('++ Queue empty, task finish!');
             vSelf._working = false;
             return true;            
         }
